@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "490dea629e3e7f3a",
+        "id": "d5f085a688af6554",
         "type": "tabs",
         "children": [
           {
-            "id": "81347b6004ebbe4d",
+            "id": "8753238f935fbad4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "csharp/13 - Properties.md",
+                "file": "csharp/12 - Information Hiding.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 215.5
   },
   "right": {
     "id": "8381a7745c6ffef0",
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "csharp/13 - Properties.md",
+                "file": "csharp/12 - Information Hiding.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "csharp/13 - Properties.md",
+                "file": "csharp/12 - Information Hiding.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "csharp/13 - Properties.md"
+                "file": "csharp/12 - Information Hiding.md"
               }
             }
           }
@@ -146,14 +146,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "81347b6004ebbe4d",
+  "active": "8753238f935fbad4",
   "lastOpenFiles": [
-    "csharp/12 - Information Hiding.md",
-    "csharp/13 - Properties.md",
-    "stealth",
-    "csharp/Object-Oriented Principles.md",
-    "winforms/12 - Multithreaded UIs.md",
-    "winforms/10 - Data Binding.md",
+    "csharp/10 - Tuples.md",
+    "csharp/2 - Your First Program.md",
     "winforms/9 - Applications.md",
     "winforms/8 - Resources.md",
     "winforms/7 - Design-Time Integration.md",
@@ -162,23 +158,27 @@
     "winforms/4 - Drawing Basics.md",
     "winforms/3 - Layout.md",
     "winforms/2 - Dialogs.md",
+    "winforms/12 - Multithreaded UIs.md",
+    "winforms/10 - Data Binding.md",
     "winforms/1 - Forms.md",
     "winforms",
-    "csharp/10 - Tuples.md",
-    "csharp/9 - Enumerations.md",
-    "csharp/5 - Math.md",
-    "csharp/3 - Variables.md",
-    "csharp/11 - Classes.md",
-    "csharp/8 - Object-Oriented Concepts.md",
-    "csharp/7 - Memory Management.md",
-    "csharp/6 - Arrays.md",
-    "csharp/4 - Type System.md",
-    "csharp/2 - Your First Program.md",
-    "csharp/1 - The CSharp Programming Language.md",
     "images/data-types.png",
     "images/Pasted image 20240414200617.png",
     "images",
+    "csharp/Object-Oriented Principles.md",
+    "csharp/9 - Enumerations.md",
+    "csharp/8 - Object-Oriented Concepts.md",
+    "csharp/7 - Memory Management.md",
+    "csharp/6 - Arrays.md",
+    "csharp/5 - Math.md",
+    "csharp/4 - Type System.md",
+    "csharp/3 - Variables.md",
+    "csharp/13 - Properties.md",
+    "csharp/12 - Information Hiding.md",
+    "csharp/11 - Classes.md",
     "Pasted image 20240414200617.png",
+    "csharp/1 - The CSharp Programming Language.md",
+    "test.md",
     "csharp"
   ]
 }
