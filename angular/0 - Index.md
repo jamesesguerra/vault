@@ -1,0 +1,4 @@
+- [Beta Docs](https://angular.dev/)
+- [Current Docs](https://angular.io/docs)
+- [Angular Learning Resources](https://github.com/avatsaev/angular-learning-resources?tab=readme-ov-file)
+- [Angular Roadmap](https://roadmap.sh/angular)
