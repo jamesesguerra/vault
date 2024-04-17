@@ -12,7 +12,6 @@ Score score = new Score();
 
 ### Constructors
 Constructors are like methods that get new instances into a legitimate starting state
-
 ```cs
 class Score {
 	public string name;

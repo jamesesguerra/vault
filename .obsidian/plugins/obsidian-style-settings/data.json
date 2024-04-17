@@ -1,0 +1,17 @@
+{
+  "anuppuccin-theme-settings@@anuppuccin-theme-light": "ctp-rosepine-light",
+  "anuppuccin-theme-settings@@anuppuccin-light-theme-accents": "ctp-accent-light-sapphire",
+  "anuppuccin-theme-settings@@anuppuccin-theme-dark": "ctp-mocha",
+  "catppuccin-font-styles@@ctp-bold": "var(--ctp-text)",
+  "catppuccin-theme-settings@@catppuccin-theme-dark": "ctp-mocha",
+  "catppuccin-theme-settings@@catppuccin-theme-accents": "ctp-accent-rosewater",
+  "sanctum@@dark-mode-contrast-mode": "sanctum-default-dark",
+  "sanctum@@color-accent-rgb-d": "243, 90, 55",
+  "anuppuccin-theme-settings@@anuppuccin-theme-accents": "ctp-accent-peach",
+  "minimal-style@@code-operator@@dark": "#3F7898",
+  "minimal-style@@code-value@@dark": "#888888",
+  "minimal-style@@code-function@@dark": "#3F7898",
+  "obsidian-typewriter@@shrink-formatting": true,
+  "red-graphite@@red-graphite-accent-color@@dark": "#2E2E2F",
+  "red-graphite@@red-graphite-base-color@@dark": "#09090A"
+}

@@ -1,8 +1,9 @@
 {
   "accentColor": "",
-  "cssTheme": "Typewriter",
+  "cssTheme": "",
   "theme": "obsidian",
   "enabledCssSnippets": [
     "appearance"
-  ]
+  ],
+  "textFontFamily": ""
 }
