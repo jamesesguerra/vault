@@ -1,3 +1,3 @@
-### Current XP: 3600
+### Current XP: 3750
 
 ### Last page: 42
