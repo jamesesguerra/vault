@@ -49,3 +49,5 @@ abstract class ChessPiece {
 ```
 
 Although, abstract classes *don't* need any abstract members to be marked as abstract. Marking it with `abstract` also prevents it from being instantiated, which is also something you'd want. Abstract classes can contain abstract, virtual, or non-virtual members.
+
+
