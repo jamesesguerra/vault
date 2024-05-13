@@ -70,6 +70,19 @@ b = a;
 areEqual = a == b; // True
 ```
 
+**The `ref` keyword**
+The `ref` keyword gives what would be a value-type parameter, reference type semantics ie making something pass by reference instead of pass by value
+
+```cs
+var x = 5;
+
+AddOne(ref x); // 6
+
+void AddOne(ref int num) {
+	++x;
+}
+```
+
 ### Cleaning Up Heap Memory
 - To clean up memory, you notify the heap that your program will no longer need some heap object and the heap can then reuse the space
 - The hard part isn't in releasing the memory but knowing *when* to release it
