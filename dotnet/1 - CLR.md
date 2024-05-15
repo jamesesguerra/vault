@@ -25,3 +25,9 @@ The difference:
 If an object survives the first mark-and-sweep pass through of the GC, it moves up to a next generation. Generations include 0, 1, 2, where each increasing generation gets checked for GC less often. There is also a large objects heap where objects greater than 85kb gets placed in immediately, and are pinned in memory so it won't be defragmented as this would be expensive.
 
 A memory leak happens when some piece of memory isn't being cleaned up, even if the object occupying it is no longer in use, therefore no other object can occupy it.
+
+
+### Dispose
+The 2 types of resources are **managed** and **unmanaged**. Managed resources are managed by the CLR, and most resources are managed. They're resources that are known by the GC, and so we don't need to worry about cleaning them up since it's done automatically. On the other hand, unmanaged resources are not known by the CLR and so it's unable to manage them. Resources like these include DB and network connections, as well as file handlers. Because they aren't managed, it's up to developers to dispose them themselves.
+
+The `Dispose` method is used to free up unmanaged resources. To implement this method, implement the `IDisposable` interface on the class that has unmanaged resources
