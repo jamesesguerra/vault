@@ -14,6 +14,11 @@ public struct Point {
 Point p1 = new Point();
 ```
 
+#### When should you choose structs over classes?
+- If you want value semantics
+- If the type is small and data-centric, with little to no behavior; you want them to be small since they're stored on the stack and will be copied
+- You want value-based equality checking
+
 ### Boxing and Unboxing
 C# uses a unified type system, that is, a type system where you can reference anything as `System.object`. 
 
@@ -33,5 +38,6 @@ object boxedNumber = number;
 
 int unboxedNumber = (int)boxedNumber;
 ```
+
 
 
