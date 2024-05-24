@@ -30,6 +30,21 @@ This null-checking can get tedious if you try to access consecutive members with
 Console.WriteLine(_scoreManager.GetScores()[0].Name); // need to check if score manager and GetScores() and GetScores[0] are null
 ```
 
+#### Nullable types
+You can apply the `?` to value types to denote that they may contain the `null` value if no other value makes sense e.g. a height property of 0 if no height data is available for a person.
+
+```cs
+class Person {
+	public int? Height { get; set; }
+}
+```
+
+You can then check if it has a valid value before unpacking its value:
+
+```cs
+if (person.Height.HasValue) Console.WriteLine(person.Height.Value);
+```
+
 ### Null-Conditional Operators
 The null-conditional operators `?.` and `?[]` can be used in place of `.` and `[]` to simultaneously check for null while accessing the member.
 

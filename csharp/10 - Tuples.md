@@ -64,3 +64,5 @@ double x = 4;
 double y = 2;
 (x, y) = (y, x);
 ```
+
+![[tuples.png.png]]
