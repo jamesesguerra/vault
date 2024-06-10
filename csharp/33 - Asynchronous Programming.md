@@ -122,3 +122,27 @@ Console.WriteLine("After the task...");
 ```
 
 In order for you not to block the main thread, you have to use `ContinueWith()` which returns a task, and place the code that depends on the completion of the task inside the body of the anonymous function you pass it. This is similar to `then` in JavaScript promises.
+```cs
+var taskContinuation = Task
+	.Run(() => CalculateLength("hello world"))
+	.ContinueWith((taskWithResult) => {
+		Console.WriteLine("Length is " + taskWithResult.Result);
+	})
+```
+
+If you want to schedule a task after a set of tasks have been completed, you can use the `Task.Factory.ContinueWhenAll()` method that takes an array of tasks and a lambda to run after the completed tasks. This is so that you can do something if you wanted to schedule something after calling `Task.WaitAll()`.
+```cs
+var tasks = new[]
+{
+    Task.Run(() => CalculateLength("hello world")),
+    Task.Run(() => CalculateLength("holla")),
+    Task.Run(() => CalculateLength("hi")),
+};
+
+var continuationTask = Task.Factory.ContinueWhenAll(
+    tasks,
+    completedTasks =>
+    {
+        Console.WriteLine(string.Join(", ", completedTasks.Select(task => task.Result)));
+    });
+```
