@@ -62,6 +62,7 @@ Working with threads and thread pools are at a low level of abstraction. You sho
 
 They allow for more efficient use of resources since they use thread pools behind the scenes. It also has a rich set of methods allowing you to wait for them to be finished, cancel a running task, execute something after completion, and handling exceptions.
 
+#### Creating and Running New Tasks
 Creating new tasks and starting them
 ```cs
 var task1 =  new Task(() => PrintPluses(30));
@@ -87,6 +88,7 @@ static int CalculateLength(string input) {
 }
 ```
 
+#### Retrieving the Value of a Task
 To retrieve the value of a task that returns a result, you access its `Result` property
 ```cs
 Console.WriteLine(taskWithResult.Result);
@@ -121,6 +123,13 @@ Task.WaitAll(task1, task2);
 Console.WriteLine("After the task...");
 ```
 
+You can also set up a quick retrieval of a result from a task with `Task.FromResult()`
+```cs
+Task<int> task = Task.FromResult(10);
+Console.WriteLine(task.Result); // 10
+```
+
+#### Continuing with Another Task
 In order for you not to block the main thread, you have to use `ContinueWith()` which returns a task, and place the code that depends on the completion of the task inside the body of the anonymous function you pass it. This is similar to `then` in JavaScript promises.
 ```cs
 var taskContinuation = Task
@@ -146,3 +155,48 @@ var continuationTask = Task.Factory.ContinueWhenAll(
         Console.WriteLine(string.Join(", ", completedTasks.Select(task => task.Result)));
     });
 ```
+
+#### Cancelling Tasks
+In order to cancel a task, the code that requesting the cancellation and the code of the task being cancelled must cooperate. They can do this with a shared cancellation token
+
+```cs
+var cancellationTokenSource = new CancellationTokenSource();
+
+var task = Task.Run(() => NeverEndingMethod(cancellationTokenSource), cancellationTokenSource.Token);
+
+string userInput;
+
+do
+{
+    Console.WriteLine("Enter something");
+    userInput = Console.ReadLine();
+} while (userInput != "cancel");
+
+cancellationTokenSource.Cancel();
+
+Console.WriteLine("Program is finished");
+
+void NeverEndingMethod(CancellationTokenSource cancellationTokenSource)
+{
+    while (true)
+    {
+        if (cancellationTokenSource.IsCancellationRequested)
+        {
+            return;
+        }
+
+        Console.WriteLine("Working...");
+        Thread.Sleep(1500);
+    }
+}
+```
+
+### Task Lifecycle
+1. **Created** - task has been created with `task.Start()` or `Task.Run()`
+2. **Waiting for Activation** - task has been started with either `task.Start()` or `Task.Run()`, or a task is waiting to be started in a `ContinueWith` method context
+3. **Waiting to Run** - task is waiting to be picked up by the scheduler
+4. **Running** - task is running
+5. **Waiting for Children to Complete** - a task that spawns another task inside its unit of work may need to wait for its child task to finish
+6. **Canceled / Ran to Completion / Faulted**
+
+
