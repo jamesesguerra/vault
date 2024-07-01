@@ -197,8 +197,12 @@ void NeverEndingMethod(CancellationTokenSource cancellationTokenSource)
     {
         if (cancellationTokenSource.IsCancellationRequested)
         {
-            return;
+            throw new OperationCanceledException(cancellationTokenSource.Token);
         }
+
+		// or
+
+		cancellationTokenSource.Token.ThrowIfCancellationRequested();
 
         Console.WriteLine("Working...");
         Thread.Sleep(1500);
