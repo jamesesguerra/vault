@@ -156,6 +156,21 @@ var continuationTask = Task.Factory.ContinueWhenAll(
     });
 ```
 
+Multiple continuations with error handling:
+```cs
+var task = Task.Run(() => Divide(3, null));
+
+task.ContinueWith((successfulTask) =>
+{
+    Console.WriteLine("Great! result successfully computed " + successfulTask.Result);
+}, TaskContinuationOptions.OnlyOnRanToCompletion);
+
+task.ContinueWith((faultedTask) =>
+{
+    Console.WriteLine("Something wrong happened: " + faultedTask.Exception.Message);
+}, TaskContinuationOptions.OnlyOnFaulted);
+```
+
 #### Cancelling Tasks
 In order to cancel a task, the code that requesting the cancellation and the code of the task being cancelled must cooperate. They can do this with a shared cancellation token
 
