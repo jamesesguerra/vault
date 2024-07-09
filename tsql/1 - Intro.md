@@ -93,3 +93,67 @@ CREATE TABLE dbo.Employees
 	salary    MONEY       NOT NULL
 );
 ```
+
+#### Defining Data Integrity
+Data integrity enforced as part of the model ie as part of the table definitions, is considered **declarative data integrity**. Data integrity enforced through code ie with stored procedures and triggers, is called **procedural data integrity**.
+
+##### Declarative data integrity
+You can enforce declarative data integrity through `CREATE TABLE` or `ALTER TABLE`. 
+
+**Primary-key constraints**
+A primary-key constraint enforces the uniqueness of rows and disallows `NULL`s in the constraint attribute. Each table can have only 1 primary key. 
+
+```sql
+ALTER TABLE dbo.Employees
+	ADD CONSTRAINT PK_Employees
+	PRIMARY KEY(empid);
+```
+
+**Unique constraints**
+A unique constraint enforces the uniqueness of rows to allow you to implement the concept of alternate keys (alternative primary keys). Unlike primary keys, you can have multiple unique constraints within the same table, and the attribute that you apply this constraint to isn't limited to `NOT NULL`.
+
+```sql
+ALTER TABLE dbo.Employees
+	ADD CONSTRAINT UNQ_Employees_ssn
+	UNIQUE(ssn);
+```
+
+**Foreign-key constraints**
+A foreign-key constraint enforces referential integrity. Its purpose is to restrict the values allowed in the FK columns in the referencing table, to those that exist in the CK (candidate key) columns in the referenced table. 
+
+Foreign keys enforce a no action -- no action means that an attempt to delete a row in the referenced table / update the candidate key values will be rejected if related rows exist in the referencing table. You can define the FK with actions that will compensate for these attempts.
+
+Options
+- `ON DELETE
+- `ON UPDATE`
+
+Actions
+- `CASCADE` - means the operation will be cascaded to the related rows in the referencing table
+- `SET DEFAULT`
+- `SET NULL`
+
+```sql
+ALTER TABLE dbo.Orders
+	ADD CONSTRAINT FK_Orders_Employees
+	FOREIGN KEY(empid)
+	REFERENCES dbo.Employees(empid);
+```
+
+**Check constraints**
+You can define a check constraint to define a predicate that a row must meet to be entered into the table or to be modified. 
+
+```sql
+-- checks if the salary is a positive value --
+ALTER TABLE dbo.Employees
+	ADD CONSTRAINT CHK_Employees_salary
+	CHECK(salary > 0.00);
+```
+
+**Default constraints**
+A default constraint is associated with a particular attribute. It's an expression that's used as the default value when an explicit value isn't specified for the attribute when you insert a row.
+
+```sql
+ALTER TABLE dbo.Orders
+	ADD CONSTRAINT DFT_Orders_orderts
+	DEFAULT(SYSDATETIME()) FOR orderts;
+```
