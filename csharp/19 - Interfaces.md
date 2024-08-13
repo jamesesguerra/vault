@@ -31,4 +31,4 @@ IDBConnection dbConnection = new MySQL(); ✅
 MySQL dbConnection = new MySQL(); ❌
 ```
 
-![[abstract-vs-interfaces.png]]
+![[abstract-vs-interfaces 1.png]]

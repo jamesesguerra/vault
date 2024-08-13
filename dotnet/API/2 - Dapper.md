@@ -1,4 +1,4 @@
-
+ 
 Dapper is used to connect to our DB and make queries on that DB.
 
 ### 2 kinds of queries
