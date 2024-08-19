@@ -4,11 +4,20 @@ Azure App Service is
 - a computing platform which also has more automation options than VMs
 
 ### Features
+
+#### Management
 - **Built-in autoscaling** - you can scale in/out (# of machines) and up/down (CPU / RAM) depending on the usage
+- Load balancing
+- Security
+- Automated management
+
+#### DevOps
 - **Container support** - you can pull container images from private ACR or Docker Hub, and use Docker Compose
 - **CI support** - you can integrate with Azure DevOps services, GitHub etc.; code will be auto-synced into the web app
 - **Deployment slots** - you can have different slots apart from the production slot which have their own host names
 - **Linux deployments** - App Service can host web apps natively on Linux
+- Custom domains
+- SSL / TLS certificates
 
 
 

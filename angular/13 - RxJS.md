@@ -18,7 +18,8 @@ The RxJS mantra is that (almost) everything can be a data stream. You can model 
 
 ```ts
 var requestStream = of("https://api.github.com/users");
-
+```
+```
 // create an observable that emits one url
 // ----- https://api.github.com/users ------>
 ```
@@ -52,4 +53,32 @@ requestStream.subscribe({
 		})
 	}
 })
+```
+
+### Observables and Promises
+What `Observable.create()` does is it creates an observable so you can explicitly tell your observers when new data comes in / when an error occurs. We just wrapped the `fetch` API with an observable, and that means an observable is also a promise, just on steroids. 
+
+You can easily convert a promise to an observable with `Observable.fromPromise(promise)`, so you can use that instead. The main difference between them is that a promise returns a **single value** whereas an observable can return **multiple values**.
+
+But in the example, creating a new stream inside the function we use to listen to the URLs is akin to callback hell because we're waiting for new values to come in before we create the new stream. Instead, you can use `map()` to take each value of stream A and project a new value onto stream B.
+
+### `map` and `mergeMap`
+So you won't have to wait for the responses in one stream before subscribing to them and creating a new one, you can simply "tack on" a pipe that takes each element in one stream, transform them in some way, and project it into another. This new stream with the transformed values is the stream you can then subscribe to. 
+
+The difference between `map` and `mergeMap` is that `map` simply emits the values whereas `mergeMap` emits the values to the trunk stream everything that will be emitted on the branch stream.
+
+```ts
+var requestStream = of("https://api.github.com/users");
+
+var responseMetastream = requestStream
+							.pipe(
+								map(url => from(fetch(url))), // returns the Observable itself
+								mergeMap(url => from(fetch(url))) // returns the values emitted by the observable
+							)
+
+responseMetastream.subscribe({
+	next: (data: any) => {
+		console.log(data);
+	}
+});
 ```

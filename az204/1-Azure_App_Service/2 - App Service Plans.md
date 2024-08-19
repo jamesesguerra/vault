@@ -20,7 +20,7 @@ Different pricing tiers determine the App Service features and the price you pay
 
 2. **Production** - high performance and high scalability and reliability, autoscaling
 	- **Standard (dedicated compute)** - run production workloads ie has deployment slots you can swap
-	-  **Premium (dedicated compute)** - enhanced performance and scale
+	- **Premium (dedicated compute)** - enhanced performance and scale
 
 3. **Isolated** - dedicated compute and networking
 	- high performance, security, and scale

@@ -11,6 +11,39 @@ App Service supports both automated and manual deployment.
 - a ZIP file you send with `curl`
 - FTP
 
+### Deployment Components
+
+#### Deployment Source
+- Azure DevOps Repos
+- GitHub
+- BitBucket
+- project in a local machine
+
+#### Build Pipeline
+The process that builds and tests your code before deployment
+- Azure Pipelines
+- GitHub Actions
+- local execution
+
+#### Deployment Mechanism
+Puts your packaged code into the `/home/site/wwwroot` of the web app. This is a mounted storage folder shared by all instances of the web app. Once the build is deployed into the folder, the web apps get notified and sync the contents. Deployment tools like Azure Pipelines, Jenkins, etc. use one of these tools.
+- Kudu endpoint
+- FTP & WebDeploy
+
+### Deployment Slots
+When your App Service Plan tier is Standard or better, you can have a staging slot and a production slot. As much as possible, you don't ever want to deploy directly to your production slot. You want to deploy to your staging slot, do tests, and when you're ready and satisfied, you can switch your staging and production slots. 
+
+If you have different branches for testing, QA, and staging, these branches should also be deployed to a staging slot so that they can be validated by stakeholders.
+
+![[deployment-slots.png]]
+
+### CI/CD with containers
+Continuous deployment with containers is trickier since you have to give the new image to the web app and let it know when to sync the changes. It's not simply pushing new code to a folder. This can be done by:
+1. As part of the build pipeline, tag the image with the git commit hash or other identifiable information. 
+2. Push the tagged image to the container registry
+3. Update the deployment slot with the new image tag, and the slot will automatically restart and pull the new image
+
+---
 #### Deploying from VS2022
 1. Make a new sample app
 ```sh
