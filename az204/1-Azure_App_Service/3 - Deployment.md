@@ -58,6 +58,7 @@ dotnet new webapp -o
 	- Create credentials for the `User Scope` and use those in VS2022
 6. Click `Publish`
 
+---
 #### Deploying using the Azure CLI
 The `az webapp up` is a command used to create and update web apps. It creates a default resource group and a default app service plan (if these aren't specified), and an app service with the specified name. It also zip deploys the files from the current working directory to the app.
 
