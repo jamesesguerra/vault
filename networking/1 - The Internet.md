@@ -67,3 +67,38 @@ In this example, packet loss will occur if the speed of the packets reaching the
 A router has many outbound links that data can be sent over. The way it knows which outbound link to forward a packet is by using its forwarding table, which is a table of destination (or portions of destination) addresses and their corresponding outbound link. The end-to-end process is then similar to a person who prefers to ask for directions rather than using a map. Each router will handle a portion of an address and forward the packet accordingly. 
 
 So for example, the address is "156 Lakeside Drive, Orlando, Florida". The first router will take care of the "Florida" portion, the next router will take care of "Orlando", so on and so forth until the packet reaches its destination address.
+
+---
+### Delays in packet-switched networks
+Unlike circuit-switched networks, there is not dedicated link between 2 hosts in a packet-switched network. This means that transmitting packets is best-effort, as the delays introduced by transmitting the packet through the network core can mean losing packets in the process.
+
+#### Types of Delays
+**Processing delay** is the first type of delay a packet will encounter once it reaches a router. This is the time it takes for a router to process a packet's header to determine which outbound link it should go out from. This is similar to a car grouped in a convoy arriving at a toll booth (the router), and the time it takes for the toll booth to tell the car which highway it should continue going at.
+
+The next type of delay is the queuing delay. Because packets can arrive at different rates, and the rate at which they're transmitted varies, packets may arrive at the router only to find out they still can't be transmitted as the transmission link is currently busy. Packets then have to be buffered in the router's queue. The time a packet spends in the router's queue is called the queuing delay.
+
+Once a packet has been instructed which outbound link to take / has cleared the router's queue, it also takes time for the router to push the bits into the transmission link. This delay is called the transmission delay.
+
+Finally, the packet has to travel the length of the transmission link to the next router. The time it takes for the packet to reach the next hop is called the propagation delay.
+
+In sum, these delays make up what is called the nodal delay. And all the nodal delays between one host and another is called an end-to-end delay.
+
+#### Throughput
+Throughput is simply the rate at which the destination addresses is able to receive packets in bits / secs. It is the *actual* rate at which a host receives packets from another. Take the example:
+
+```
+server <--------> router <--------> client
+```
+In this example, if the bandwidth of the link connecting the server to the router is less than the bandwidth of the link connecting the router to the client, the total throughput will just be the bandwidth of the server as the data will just "flow" through. This is because the router can push out data coming from the server faster than it can receive it. 
+
+On the other hand, if the client link bandwidth is slower than the server link's, the bottleneck will be at the client link since it won't be able to send out packets as fast as it can receive them. And so the bottleneck of the end-to-end throughput between 2 hosts will be the minimum transmission link rate.
+
+---
+### Network Protocol Layers
+Because the Internet is so complicated and has a lot of moving parts, it's better to view the process of sending messages between hosts in terms of layers and the services each layer provides. This is why it's better to organize network protocols and the software and hardware components that implement them this way. By organizing them in this modular fashion, each layer can also then swap out their implementation with something else so long as it still provides the service it intends to, and everything will still work the same.
+
+Each network protocol layer carries out its functionality by (1) performing actions within that layer, and (2) by using the services in the layers below. A layer's functionality is also called its **service model**.
+
+A network protocol layer can either be implemented in software or in hardware. Protocols like HTTP and SMTP are normally implemented in software, and physical and link-layer protocols are usually implemented in hardware. It's also important to note that each protocol layer can be distributed among the different network components, and so each layer not only includes the protocols within that layer, but also the components that implement those protocols.
+
+

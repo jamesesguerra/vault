@@ -62,7 +62,34 @@ dotnet new webapp -o
 #### Deploying using the Azure CLI
 The `az webapp up` is a command used to create and update web apps. It creates a default resource group and a default app service plan (if these aren't specified), and an app service with the specified name. It also zip deploys the files from the current working directory to the app.
 
+---
+#### Deploying using local Git
+1. Make sure the current branch of the repo is `main`
+```sh
+git branch -m main
+```
+2. Make sure the web app being deployed to is configured for local Git deployment. 
+```sh
+az webapp create --name <app-svc> --deployment-local-git # during creation
+# or
 
+```
 
+3. Configure the deployment user for local Git deployment
+```sh
+az webapp deployment user set --user-name <username> --password <password>
+```
+
+4. Grab the deployment URL for the web app
+
+5. Add a remote to the deployment URL
+```sh
+git remote add azure <deployment-URL>
+```
+
+6. Push to the `azure` remote
+```sh
+git push azure main
+```
 
 
