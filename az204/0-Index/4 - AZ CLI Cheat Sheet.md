@@ -1,5 +1,6 @@
 
 ### General
+- `az ad signed-in-user show` - show currently logged-in user
 - `az login` - log in to Azure account
 - `az group create --name <rg> --location "<location>"` - create a resource group in a region
 - 

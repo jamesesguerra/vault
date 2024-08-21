@@ -15,7 +15,7 @@ Different pricing tiers determine the App Service features and the price you pay
 		- **NOTE:** the Shared pricing tier is only available for Windows 
 	- **Basic (dedicated compute) 
 		- runs apps on dedicated Azure VMs, and only apps on the same App Service plan share the same compute resources;
-		- the higher the tier, the more you get to scale out manually
+		- scaling out is available already and the higher the tier, the more you get to scale out manually
 		- no advanced traffic management
 
 2. **Production** - high performance and high scalability and reliability, autoscaling

@@ -1,4 +1,4 @@
-
+a
 App Service supports both automated and manual deployment. 
 
 **Automated deployment** or CD pushes changes quickly with minimal effect on users
@@ -37,6 +37,13 @@ If you have different branches for testing, QA, and staging, these branches shou
 
 ![[deployment-slots.png]]
 
+#### Create and use deployment slots
+1. Make sure app service plan tier is Standard or better
+2. Create a new slot by going to `Deployment` > `Deployment Slots` > `+ Add Slot`
+3. Go to VS2022 and create a new publish profile by going to `Build` > `Publish <app-name>` > `+ New profile` (publish profiles are added to the `Properties` folder)
+4. Expand the folders until you see the deployment slot you just created and then hit `Publish`
+5. Swap deployment slots by going to `Deployment` > `Deployment Slots` > `Swap` and then select the target and source slots.
+
 ### CI/CD with containers
 Continuous deployment with containers is trickier since you have to give the new image to the web app and let it know when to sync the changes. It's not simply pushing new code to a folder. This can be done by:
 1. As part of the build pipeline, tag the image with the git commit hash or other identifiable information. 
@@ -63,14 +70,6 @@ dotnet new webapp -o
 The `az webapp up` is a command used to create and update web apps. It creates a default resource group and a default app service plan (if these aren't specified), and an app service with the specified name. It also zip deploys the files from the current working directory to the app.
 
 ---
-
-#### Create and use deployment slots
-1. Make sure app service plan tier is Standard or better
-2. Create a new slot by going to `Deployment` > `Deployment Slots` > `+ Add Slot`
-3. Go to VS2022 and create a new publish profile by going to `Build` > `Publish <app-name>` > `+ New profile` (publish profiles are added to the `Properties` folder)
-4. Expand the folders until you see the deployment slot you just created and then hit `Publish`
-5. Swap deployment slots by going to `Deployment` > `Deployment Slots` > `Swap` and then select the target and source slots.
----
 #### Deploying using local Git
 1. Make sure the current branch of the repo is `main`
 ```sh
@@ -82,13 +81,17 @@ az webapp create --name <app-svc> --deployment-local-git # during creation
 # or
 
 ```
+3. Update the app's settings so that the default deployment branch is `main`
+```
+az webapp config appsettings set --name <app-svc> --resource-group <rg> --settings DEPLOYMENT_BRANCH='main'
+```
 
-3. Configure the deployment user for local Git deployment
+5. Configure the deployment user for local Git deployment
 ```sh
 az webapp deployment user set --user-name <username> --password <password>
 ```
 
-4. Grab the deployment URL for the web app
+4. Grab the deployment URL for the web app (outputted during creation using AZ CLI, or using the portal)
 
 5. Add a remote to the deployment URL
 ```sh
