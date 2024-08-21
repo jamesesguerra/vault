@@ -54,7 +54,7 @@ dotnet new webapp -o
 3. Navigate to the resource group folder and select the premade app service instance
 4. Wait for the publish profile to finish creating, and then go to the `Connection` tab
 5. In my case, the preset connection credentials didn't work. I had to:
-	- Go to the web app > `FTPS Credentials`
+	- Go to the web app > `Deployment` > `Deployment Center` > `FTPS Credentials`
 	- Create credentials for the `User Scope` and use those in VS2022
 6. Click `Publish`
 
@@ -62,6 +62,14 @@ dotnet new webapp -o
 #### Deploying using the Azure CLI
 The `az webapp up` is a command used to create and update web apps. It creates a default resource group and a default app service plan (if these aren't specified), and an app service with the specified name. It also zip deploys the files from the current working directory to the app.
 
+---
+
+#### Create and use deployment slots
+1. Make sure app service plan tier is Standard or better
+2. Create a new slot by going to `Deployment` > `Deployment Slots` > `+ Add Slot`
+3. Go to VS2022 and create a new publish profile by going to `Build` > `Publish <app-name>` > `+ New profile` (publish profiles are added to the `Properties` folder)
+4. Expand the folders until you see the deployment slot you just created and then hit `Publish`
+5. Swap deployment slots by going to `Deployment` > `Deployment Slots` > `Swap` and then select the target and source slots.
 ---
 #### Deploying using local Git
 1. Make sure the current branch of the repo is `main`
