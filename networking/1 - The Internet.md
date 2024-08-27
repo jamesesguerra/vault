@@ -38,6 +38,13 @@ Network protocols govern the communication between all hardware and software com
 ### Types of Access Networks
 Access networks are the network that connect end systems (computing devices at the edge of the Internet), to the first router (edge router), to other distant systems.
 
+Categories and their bandwidth:
+- (A)DSL - 55 Mbps down , 15 Mbps up, dedicated
+- HFC - 42.8 Mbps down, 30.7 Mbps up, shared
+- FTTH - 20 Mbps down
+- Satellite - 1Mbps
+- Dial up - 56 Kbps
+
 #### Digital Subscriber Line (DSL)
 A customer gets internet access through the same company that provides them with a telephone line. Their DSL modem uses the existing telephone line to exchange data with a DSL access multiplexer at the telephone office. The home DSL takes digital data and translates it to high-frequency tones for transmission over telephone wires. The wires are setup for multiplexing so that both data and telephone signals can travel at the same time. DSL is only recommended for households that are near the central office.
 
@@ -56,6 +63,8 @@ If the LAN connects end systems to the edge router, and an ISP gives an edge rou
 
 ### Packet Switching
 In order for one end system to send a message to another, it has to segment and encapsulate it in a **packet**. It then sends the packets to packet switches which are tasked to take incoming packets and forward them out. Most packet switches follow a rule called store-and-forward transmission, wherein they only forward a packet once all the bits of that packet are received. Otherwise, they store it in a buffer and wait for the remaining packets to arrive. 
+
+A packet switch will transmit packets equal to the full transmission rate of each communication link. So if a packet is L bits long, and the link transmits packets at a rate of R bits per second, a packet switch will transmit a packet in L / R seconds.
 
 The packet switch's output buffer is also where packets are stored whenever they're received, but the output link which they're meant to go out from is busy transmitting another packet. This is what packets can suffer from, something called **queuing delays**. If the output buffer is full, packet loss will occur. This can happen when the link *to* the router is faster than the link *from* the router.
 
@@ -101,4 +110,17 @@ Each network protocol layer carries out its functionality by (1) performing acti
 
 A network protocol layer can either be implemented in software or in hardware. Protocols like HTTP and SMTP are normally implemented in software, and physical and link-layer protocols are usually implemented in hardware. It's also important to note that each protocol layer can be distributed among the different network components, and so each layer not only includes the protocols within that layer, but also the components that implement those protocols.
 
+#### OSI Model
+The OSI model is similar to the IP stack except it includes 2 new layers -- the presentation and session layers. The presentation layer is responsible for helping the communicating applications interpret the data exchanged. This includes data encryption and data compression. Meanwhile, the session layer is responsible for delimiting and synchronization of data being exchanged.
 
+#### Encapsulation
+Each layer below the OSI model "encapsulates" the data from upper layers by wrapping it, and adding their own headers. The layer uses a protocol to transform one protocol data unit (PDU) into another PDU.
+
+![[osi-encapsulation.png]]
+
+In each layer down the stack, the current layer takes the payload of the upper layer, and adds its own information in the form of header fields. An analogy for this is someone sending a memo from their company to another:
+- application layer - paper with message
+- transport layer - take paper and put inside company envelope
+- network layer - take company envelope and place inside postal service envelope
+
+Once the receiver gets the envelope, they do the whole process in reverse. It's also important to note that not all network components implement all layers. For example, switches only operate with L1 and L2, whereas routers operate from L1-L3.

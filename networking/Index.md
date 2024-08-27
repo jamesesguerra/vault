@@ -1,1 +1,2 @@
 - [Interactive exercises](http://gaia.cs.umass.edu/kurose_ross/interactive/)
+- https://media.pearsoncmg.com/ph/esm/ecs_kurose_compnetwork_8/cw/#interactiveanimations
