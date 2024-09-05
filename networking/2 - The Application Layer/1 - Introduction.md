@@ -13,7 +13,6 @@ As the number of clients increases, the load on the server also increases. This 
 #### Peer-to peer (P2P)
 In a P2P architecture, the app exploits direct connection between intermittently connecting hosts called **peers**. There is no dedicated server that services requests and so it's a decentralized architecture. One of the strongest advantages of this is its self-scalability as even if the number of hosts increases, therefore increasing the number of requests, the capability of the app as a whole to service requests also increases. However, because it does have issues with security because of its decentralized nature.
 
-
 ### Sockets
 In reality, it's not actual network applications that communicate with each other. Instead, it's actually processes -- running instances of a program that send messages to each other. In this case as well, we aren't talking about interprocess communication ie processes communicating on the same host. We're talking about processes communicating on *different* hosts.
 
@@ -60,7 +59,6 @@ UDP is a no-frills protocol that uses a connectionless service, and also doesn't
 
 4. **Secure Sockets Layer (SSL)**
 SSL isn't necessarily a 3rd transport protocol. Instead, it's an enhancement to TCP and UDP. Because TCP and UDP don't provide any security services, an application can implement SSL in the application layer to add data encryption, data integrity, and end-point authentication. By using SSL, the sending process's message first goes through the SSL socket, where it encrypts the data, before reaching the TCP socket. When the receiving TCP socket receives the message, it passes it to the receiving SSL socket which then decrypts the data.
-
 
 ### Application Layer Protocols
 An application layer protocol defines how application processes running on different end systems pass messages to each other. It defines:

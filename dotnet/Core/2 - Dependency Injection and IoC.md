@@ -1,7 +1,0 @@
-### Services
-Services are small, independent pieces of code (classes) written either by you, or someone else, that provides some functionality to your app. Each service should be responsible for a small piece, but you can combine them to create the complete application.
-
-### The need for DI
-If you have some services that rely on each other, for example, if `OrderTotalCalculator` relies on the functionality of the `ShippingCostService` and the `TaxCalculator` to work out the total price of an order, it needs to reference them somehow. The naive approach to this is creating an instance of these classes inside the `OrderTotalCalculator` and using their methods directly. However, this violates the single-responsibility principle because when some functionality of those classes change, it's very likely you'll have to change parts of `OrderTotalCalculator` as well.
-
-One solution to this is to invert the control and make it someone else's problem. So inside `OrderTotalCalculator`, instead of creating these classes yourself, you can simply list your dependencies in the constructor, and let another class fill in those dependencies for you. Then the `OrderTotalCalculator` can focus on its functionality without worrying about anything else. 
