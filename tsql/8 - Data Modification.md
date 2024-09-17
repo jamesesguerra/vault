@@ -1,4 +1,4 @@
-#### Inserting Data
+### Inserting Data
 There are several statements you can use to insert data into tables
 
 **INSERT VALUES**
@@ -82,7 +82,7 @@ SELECT IDENT_CURRENT('dbo.T1')
 
 Some of the shortcomings of the identity property is that regardless of whether the transaction was successful or not, the scope identity gets incremented anyway. Also, removing / adding this property to already existing columns is cumbersome. Moreover, you can only insert by specifying the `IDENTITY_INSERT` to on, but you cannot update the values.
 
-**Sequence**
+**Sequences**
 A sequence is a more flexible way of generating numeric keys. One of the advantages is that they're not tied to a specific column, and so when you want a new key, you just invoke a function against the value.
 
 The minimum required value is just the name of the sequence, and it will assume the defaults.
@@ -113,6 +113,106 @@ CREATE SEQUENCE dbo.SeqOrderIDS
 And to generate a new value from the sequence, you invoke the standard function `NEXT VALUE FOR`
 ```sql
 SELECT NEXT VALUE FOR dbo.SeqOrderIDS;
+```
+
+If you wanna check the current value of a sequence, you can enter:
+```sql
+SELECT current_value
+FROM sys.sequences
+WHERE OBJECT_ID = OBJECT_ID(N'dbo.SeqOrderIDS');
+```
+
+---
+### Deleting data
+You can delete specific rows that evaluate to true when a filter is provided
+```sql
+DELETE FROM [dbo].[Orders]
+WHERE orderdate < '20150101';
+```
+
+You can also join tables in a `DELETE` statement to get information from other tables to use in the filter condition. However, this is nonstandard, and if you want to do this in other SQL flavors, you can use subqueries
+```sql
+DELETE FROM O
+FROM [dbo].[Orders] AS O
+	INNER JOIN [dbo].[Customers] AS C
+		ON O.custid = C.custid
+WHERE C.country = N'USA';
+```
+
+You can also use `TRUNCATE` to delete all the rows in an entire table and it would be faster than using `DELETE` since it has minimal logging
+```sql
+TRUNCATE TABLE [dbo].[T1];
+```
+
+---
+### Modifying data
+You can modify data with the `UPDATE` statement. You use a `WHERE` clause to specify a subset of the rows to be updated, and `SET` followed by a comma-separated list of column and values to update the values of the rows. SQL also supports compound operators such as `+=`, `-=`, etc. 
+
+```sql
+UPDATE [dbo].[OrderDetails]
+	SET discount = discount + 0.05
+WHERE productid = 51;
+```
+
+`UPDATE` also supports updating based on a join.
+
+```sql
+UPDATE OD
+	SET discount += 0.05
+FROM dbo.OrderDetails OD
+	INNER JOIN dbo.Orders AS O
+		ON OD.orderid = O.orderid
+WHERE O.custid = 1;
+```
+
+**Assignment UPDATE**
+You also can use the `UPDATE` statement to both update rows and set a variable at the same time.
+
+```sql
+DECLARE @nextval AS INT;
+
+UPDATE dbo.MySequences
+	SET @nextval = val += 1
+WHERE id = 'SEQ1';
+
+SELECT @nextval;
+```
+
+---
+
+### OUTPUT
+The OUTPUT clause is useful if you want to return data about the rows you've just modified. It's similar to a SELECT clause, except you prefix the attributes with either the *inserted* or *deleted* keyword. Inserts use *inserted*, deletes use *deleted*. For updates, use *deleted* for the old state and *inserted* for the new state.
+
+**INSERT with OUTPUT**
+```sql
+INSERT INTO dbo.T1(datacol)
+	OUTPUT inserted.keycol, inserted.datacol
+		SELECT lastname
+		FROM HR.Employees
+		WHERE country = N'USA';
+```
+
+**DELETE with OUTPUT**
+```sql
+DELETE FROM dbo.Orders
+	OUTPUT
+		deleted.orderid,
+		deleted.orderdate,
+		deleted.empid,
+		deleted.custid
+WHERE orderdate < '20160101';
+```
+
+**UPDATED with OUTPUT**
+```sql
+UPDATE dbo.OrderDetails
+	SET discount += 0.05
+OUTPUT
+	inserted.orderid,
+	inserted.productid,
+	deleted.discount AS olddiscount,
+	inserted.discount AS newdiscount
+WHERE productid = 51;
 ```
 
 
