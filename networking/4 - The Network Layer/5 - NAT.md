@@ -1,0 +1,8 @@
+Given that an IP address has to be associated with a single interface, and that each IP address must be globally unique, an obvious problem arises: there are too many devices wanting to connect to the Internet. There are more network hosts than there are IP addresses in the IPv4 address range.
+
+To solve this, a mechanism called **network address translation (NAT)** is used. In this setup, there is a NAT-enabled home router that has an interface connected to the home network. Inside the subnet, devices use an address space that is part of 1 of 3 IP address ranges that are reserved for private IP addresses. Private IP addresses are IP addresses that aren't globally unique and therefore cannot be routed to the public Internet. They only make sense inside the private subnet.
+
+#### NAT process
+![[nat-process.png]]
+
+The way NAT works is that it makes it so that the WAN see the NAT-enabled router as just 1 host with 1 public IP address. When a host wants to send a packet through the Internet, it sends it to the LAN side of the router. The router then converts the port used by the client to a random port and then takes the private IP and *translates* it into its public IP. The way it knows where to forward packets once it receives replies is by maintaining a NAT translation table. Once it receives a reply on the public-facing socket, it rewrites the destination from itself, to the client that originally made the request.
