@@ -179,4 +179,36 @@ You can then define the table variable like this
 DECLARE @MyOrderTotalsByYear AS dbo.OrderTotalsByYear;
 ```
 
+### Dynamic SQL
+Dynamic SQL is constructing SQL queries as character strings and executing that batch using the `EXEC` command or using the `sp_executesql` stored procedure.
 
+This is useful for several reasons:
+- automating admin tasks
+- improving performance of certain tasks
+
+#### EXEC command
+The `EXEC` command can be used to execute a query stored as a character string, and also to execute stored procedures.
+
+Executing a character string entails entering it in parentheses.
+
+```sql
+DECLARE @sql AS VARCHAR(100);
+SET @sql = 'PRINT ''This message was printed by a dynamic SQL batch''';
+
+EXEC(@sql);
+```
+
+However, a better approach to executing character strings as queries is using the `sp_executesql` SP. This approach is safer as it uses parameters and arguments instead of inserting strings directly to the query. Also, it's more performant as the execution plan (physical processing required to describe which objects to access and how to access them etc) can be cached and reused.
+
+In this approach, the `@stmt` parameter specifies the character string, the `@params` specifies the declaration of input and output parameters, followed by the assignments of I/O separated by commas.
+
+```sql
+DECLARE @sql AS NVARCHAR(100);
+
+SET @sql = N'SELECT orderid, custid, empid, orderdate FROM Sales.Orders WHERE orderid = @orderid;';
+
+EXEC sp_executesql
+	@stmt = @sql,
+	@params = N'@orderid AS INT',
+	@orderid = 10248;
+```
