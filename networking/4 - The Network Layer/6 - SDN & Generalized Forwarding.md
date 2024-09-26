@@ -13,3 +13,11 @@ OpenFlow is a standard that pioneered the match-plus-action forwarding abstracti
 In OpenFlow 1.0, there are 11 header fields values from 3 different protocol layers you can match on. Thus, OpenFlow-enabled middleboxes can perform as a router and a switch.
 
 ![[match-headers.png]]
+
+---
+### SDN
+SDN represents a significant separation of concerns when it comes to network functionality such as switches, controllers, and network control applications. In a pre-SDN model, a switch was embedded with software that makes it monolithic and sold by a single vendor. Through SDN, you can unbundle computing hardware, system software, and network applications. Data plane switches, SDN controllers, and network-control applications can be provided by different vendors.
+
+You have 1 SDN controller that maintains accurate network state information to network-control applications running in the same plane. These network-control applications are the *brains* of the control plane as they monitor, specify, and control the data plane.
+
+![[sdn-model.png]]

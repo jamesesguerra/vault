@@ -212,3 +212,44 @@ EXEC sp_executesql
 	@params = N'@orderid AS INT',
 	@orderid = 10248;
 ```
+
+### Routines (functions)
+Routines or functions encapsulate a series of computations in a black box. SQL Server supports 3 types of routines:
+- user-defined functions
+- stored procedures
+- triggers
+
+You can use either T-SQL or .NET code to create routines. When dealing with data manipulation, use T-SQL. When dealing with string manipulation, iterative logic, or computationally-intensive operations, use .NET code.
+
+**User-defined functions**
+SQL Server supports scalar UDFs that return a single value, and table-valued UDFs that return a table. You can incorporate UDFs into queries, for example, you can use scalar UDFs where a scalar value is expected, and table-valued UDFs after a `FROM` statement.
+
+You're not allowed to invoke statements that have side effects inside UDFs, such as any schema / data changes.
+
+```sql
+CREATE FUNCTION dbo.GetAge
+(
+	@birthdate AS DATE,
+	@eventdate AS DATE
+)
+RETURNS INT
+AS
+BEGIN
+	RETURN
+		DATEDIFF(year, @birthdate, @eventdate)
+			- CASE WHEN 100 * MONTH(@eventdate) + DAY(@eventdate)
+					  < 100 * MONTH(@birthdate) + DAY(@birthdate)
+				  THEN 1 ELSE 0
+			  END;
+END;
+GO
+```
+
+Using the UDF:
+```sql
+SELECT
+	empid, firstname, lastname, birthdate,
+	dbo.GetAge(birthdate, SYSDATETIME()) AS age
+FROM HR.Employees;
+```
+
