@@ -21,3 +21,14 @@ SDN represents a significant separation of concerns when it comes to network fun
 You have 1 SDN controller that maintains accurate network state information to network-control applications running in the same plane. These network-control applications are the *brains* of the control plane as they monitor, specify, and control the data plane.
 
 ![[sdn-model.png]]
+
+#### SDN controller layers
+1. **southbound layer**
+- communication between SDN controller and network-controlled devices
+- controller communicates via a protocol, OpenFlow, to control the devices
+- devices communicate to inform the controller about the current state of the network
+
+2. **northbound layer**
+- interface to the network-control applications
+- network-control applications can read/write network state data and flow tables
+- applications can also subscribe to events and respond 

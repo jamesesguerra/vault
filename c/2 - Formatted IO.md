@@ -11,6 +11,10 @@ The conversion specification is in the form `%m.pX` where:
 
 One pitfall is including different characters / white space in the format string. Once `scanf` tries to match a different character to the input string and cannot match, it will terminate and leave the characters in stdin to be read by the next call to `scanf`.
 
+**TLDR:**
+- try to match a number / letter to an input string and get whitespace, it's ok and ignore whitespace
+- try to match a different character e.g. symbols to an input string and get whitespace, get error and terminate
+
 ```c
 scanf("%d%d%f%f", i, x, y, j);
 ```
