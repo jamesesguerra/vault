@@ -213,7 +213,7 @@ EXEC sp_executesql
 	@orderid = 10248;
 ```
 
-### Routines (functions)
+#### Routines (functions)
 Routines or functions encapsulate a series of computations in a black box. SQL Server supports 3 types of routines:
 - user-defined functions
 - stored procedures
@@ -221,7 +221,7 @@ Routines or functions encapsulate a series of computations in a black box. SQL S
 
 You can use either T-SQL or .NET code to create routines. When dealing with data manipulation, use T-SQL. When dealing with string manipulation, iterative logic, or computationally-intensive operations, use .NET code.
 
-**User-defined functions**
+##### User-defined functions (pure functions)
 SQL Server supports scalar UDFs that return a single value, and table-valued UDFs that return a table. You can incorporate UDFs into queries, for example, you can use scalar UDFs where a scalar value is expected, and table-valued UDFs after a `FROM` statement.
 
 You're not allowed to invoke statements that have side effects inside UDFs, such as any schema / data changes.
@@ -251,5 +251,89 @@ SELECT
 	empid, firstname, lastname, birthdate,
 	dbo.GetAge(birthdate, SYSDATETIME()) AS age
 FROM HR.Employees;
+```
+
+##### Stored Procedures (impure functions)
+Stored procedures are much like UDFs in that they encapsulate code, can take input and output arguments, as well as return results. The difference is that stored procedures can have side effects, and thus can perform schema changes.
+
+They have many benefits such as:
+- allowing you to better manage code as you can alter them with `ALTER PROC`
+- better control of security as you can give users the privilege to execute the stored procedure without giving them access to perform the underlying activities
+
+```sql
+CREATE PROC Sales.GetCustomerOrders
+	@custid     AS INT,
+	@fromdate   AS DATETIME = '19000101',
+	@todate     AS DATETIME = '99991231',
+	@numrows    AS INT OUTPUT
+AS
+SET NOCOUNT ON;
+
+SELECT orderid, custid, empid, orderdate
+FROM Sales.Orders
+WHERE custid = @custid
+	AND orderdate >= @fromdate
+	AND orderdate < @todate;
+
+SET @numrows = @@ROWCOUNT
+GO
+```
+
+Using the stored procedure:
+```sql
+DECLARE @rc AS INT;
+
+EXEC Sales.GetCustomerOrders
+	@custid = 1,
+	@fromdate = '20210101',
+	@todate = '20220101',
+	@numrows = @rc OUTPUT;
+
+SELECT @rc AS numrows;
+```
+
+##### Triggers
+Triggers are special kinds of stored procedures in that you can't execute explicitly. Instead, they're triggered by an event. You can attach a trigger to 2 kinds of events:
+- **data manipulation events** - DML statements
+- **data definition events** - DDL statements
+
+Triggers are mainly used to perform auditing, enforcing policies, and enforcing integrity rules.
+
+They are fired per statement, and not per row. And they're also bound to the transaction that includes the event that caused the trigger to fire. That is, if you rollback within the trigger, the statements that caused the trigger to fire will also be rolled back.
+
+**DML triggers**
+There are 2 kinds of DML triggers: *after* which runs after the the event it's associated with finished, and *instead of* which runs instead of that event.
+
+In a trigger, you have access to *inserted* and *deleted* tables which contain the modified rows, and deleted rows respectively, of the event that caused the trigger. For instead of triggers, these tables contain the supposed-to-be modified and deleted rows by the statement.
+
+example: creating an audit log table and populating it with a trigger
+
+```sql
+CREATE TABLE dbo.T1
+(
+	keycol INT NOT NULL PRIMARY KEY,
+	datacol VARCHAR(10) NOT NULl
+);
+
+CREATE TABLE dbo.T1_Audit
+(
+	audit_lsn INT NOT NULL IDENTITY PRIMARY KEY,
+	dt DATETIME2(3) NOT NULL DEFAULT(SYSDATETIME()),
+	login_name sysname NOT NULL DEFAULT(ORIGINAL_LOGIN()),
+	keycol INT NOT NULL,
+	datacol VARCHAR(10) NOT NULL
+);
+```
+
+creating an after trigger attached to inserting rows in `dbo.T1` that inserts these rows in the audit log table
+```sql
+CREATE TRIGGER trg_T1_insert_audit ON dbo.T1 AFTER
+INSERT
+AS
+SET NOCOUNT ON;
+
+INSERT INTO dbo.T1_Audit(keycol, datacol)
+SELECT keycol, datacol FROM inserted;
+GO
 ```
 

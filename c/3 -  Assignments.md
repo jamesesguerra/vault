@@ -8,6 +8,8 @@ x = y = z = 10;
 
 In this example, `z` is first assigned 10 because the assignment operator is right-associative. `y` then gets assigned the value of `z` after the assignment, which is 10, and so on.
 
+> **side effects** - doing more than just computing a value
+
 ##### L-values
 Assignment operators are also different from other operators in that their left operand must be an L-value. Lvalues are objects stored in memory ie not a constant or a result of a computation.
 
