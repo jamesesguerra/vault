@@ -16,10 +16,16 @@
 - gets the message from the source host to the destination host
 - the postal service that uses an IP address to figure out its destination from source house to destination house
 - uses parts of an IP address (real address) and asks routers (toll booths) for the what highway to exit / take
+- IPs are like real addresses in that they reflect where you are. real addresses reflect where you are in the world whereas IP address reflect where you are in the Internet
 - routers (toll booths) don't know the complete path, they just know the next exit to take, the postal service (SDN controller) has an algorithm for computing the least cost path from one house and sends them to each toll booth, without going through highways that aren't illegal
 - you can pass through different cities (AS) that employ their own way of routing, but ultimately a higher body computes for the routing between cities (BGP)
 
 4. **The link layer**
+- where the rubber meets the road
 - gets the message from one network node to another network node through a communication link
 - the transportation mode of the person carrying the envelope (whether car, bus, plane)
 - physically gets the person from one place to another through a transport segment (highway)
+- you need a transportation mode to get across an ocean in the same way you need a network interface card (NIC) to transfer a datagram from one node to an adjacent node
+- MAC address is like phone number
+
+not toll booth, people in the postal service that are employed nalang.

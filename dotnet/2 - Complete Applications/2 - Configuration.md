@@ -105,7 +105,7 @@ if (builder.Environment.IsDevelopment())
 ```
 
 #### Reloading config values
-If configuration values change, you want your app to keep running and use the new configuration values so it doesn't have to start up again. You can do this by adding a `reloadOnChange` configuration to the provider. This typically only works for file-based providers
+If configuration values change, you want your app to keep running and use the new configuration values so it doesn't have to start up again. You can do this by adding a `reloadOnChange` configuration to the provider. This typically only works for file-based providers and isn't free as it sets up a file watcher in the background.
 
 ```csharp
 builder.Configuration
@@ -115,3 +115,5 @@ builder.Configuration
 		   reloadOnChange: true
 	   );
 ```
+
+prev: [[1 - Dependency Injection]]

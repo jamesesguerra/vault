@@ -1,4 +1,4 @@
-**Middleware** are classes or functions that are run sequentially in a bidirectional pipeline, that define how your app responds to requests. They map to cross-cutting concerns i.e. they're responsible for a lot of things in different layers in your app e.g. logging, security.
+ **Middleware** are classes or functions that are run sequentially in a bidirectional pipeline, that define how your app responds to requests. They map to cross-cutting concerns i.e. they're responsible for a lot of things in different layers in your app e.g. logging, security.
 
 They can:
 - handle HTTP requests by generating a response
@@ -76,3 +76,6 @@ if (!app.Environment.IsDevelopment())
 app.MapGet("/error", () => "Sorry, an error occurred.");
 app.Run();
 ```
+
+prev: [[1 - Creating a new App]]
+next: [[3 - Minimal APIs]]

@@ -30,3 +30,5 @@ int i = 0, y = 0;
 ++i; // 1
 y++; // 0
 ```
+
+![[c-operators.png]]

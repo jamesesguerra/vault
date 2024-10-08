@@ -17,3 +17,5 @@ There are different ways you can build applications with .NET Core
 5. **MVC controllers** - similar to Razor pages, without the page-based paradigm
 6. **Blazor WebAssembly** - SPA framework similar to Angular and React
 7. **Blazor Server** - server-rendered application with SPA feel (SSR)
+
+next: [[1 - Creating a new App]]

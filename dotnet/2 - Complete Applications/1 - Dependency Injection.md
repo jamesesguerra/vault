@@ -123,12 +123,35 @@ You can get a hold of an implementation of a service in one of 2 ways:
 
 Generally, you want to avoid the second way of doing it as this follows the service locator pattern. However, this is the only way to access services in the main loop of the application, so there is no problem using it there. But when it comes to other types, you want to inject it in the constructor / endpoint handler.
 
+##### Injecting multiple instances of an interface
+If you have multiple implementations of an interface you want to register and inject, you can start by registering the services:
 
+```csharp
+builder.Services.AddScoped<IMessageSender, EmailSender>();
+builder.Services.AddScoped<IMessageSender, SmsSender>();
+```
 
+You can then inject all the services by injecting an array of the interface, which gives you access to all the implementations in the order you registered them:
 
+```csharp
+string RegisterUser(
+	string username,
+	IEnumerable<IMessageSender> senders)
+{
+	foreach (var sender in senders) { }
+}
+```
 
+#### Service Lifetimes
+How long do instances of a service last in the DI container? This is dictated by the lifetime you specify.
 
+1. **transient** - every time an instance of a service is requested, a new instance is created
+2. **scoped** - creates and shares an instance within a scope e.g. one HTTP request
+3. **singleton** - you get the same instance of the service regardless of scope / how many times you call it
 
 ---
 ## Service Locator
 An alternative to DI, but achieves the same result wherein the `MovieLister` isn't dependent on the `MovieFinder` implementation. A service locator is an object that knows how to get a hold of all the services an application might need. There is no inversion of control in this case since there is an explicit request to get a hold of an implementation. In dependency injection, that control is inverted to something else.
+
+
+next: [[2 - Configuration]]

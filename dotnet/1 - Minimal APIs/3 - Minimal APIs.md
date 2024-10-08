@@ -173,3 +173,6 @@ fruitApiWithValidation.MapPost("/fruits/{id}", (string id, Fruit fruit) =>
 		}
 ));
 ```
+
+prev: [[2 - Middleware]]
+next: [[4 - Routing]]

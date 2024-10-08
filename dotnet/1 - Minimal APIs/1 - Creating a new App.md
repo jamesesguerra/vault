@@ -112,4 +112,5 @@ The first piece of middleware that is added by default is the routing middleware
 
 ![[http-request-process.png]]
 
-
+prev: [[dotnet/1 - Minimal APIs/0 - Introduction|0 - Introduction]]
+next: [[2 - Middleware]]
