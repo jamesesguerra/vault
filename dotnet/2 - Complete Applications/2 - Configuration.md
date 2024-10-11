@@ -116,4 +116,83 @@ builder.Configuration
 	   );
 ```
 
+---
+### Strongly-typed settings and the options pattern
+The preferred way to store and retrieve configuration is by using the options pattern which makes it so that you can access your configuration as POCOs. The previous approach is prone to errors since you're using strings to access sections and parts of the configuration.
+
+**IOptions**
+To bind configuration values to custom POCO classes, you can use the `IOptions<T>` interface with a single property, `Value` that contains the configured POCO class at runtime.
+
+You first create the custom POCO class that mimics a section of your configuration file.
+
+```csharp
+class AppDisplaySettings {
+	public string Title { get; set; }
+	public bool ShowCopyright { get; set; }
+}
+```
+
+You then configure the instance to which the options instance will bind against.
+```csharp
+builder.Services.Configure<AppDisplaySettings>(builder.Configuration.GetSection("AppDisplaySettings"));
+```
+
+And finally inject it in your endpoint
+```csharp
+app.MapGet("/options", (IOptions<AppDisplaySettings> options) => {
+	var settings = options.Value;
+	return new { Title = settings.Title, ShowCopyright = settings.ShowCopyright };
+})
+```
+
+**IOptionsSnapshot**
+The thing that `IOptions` can't do is reload itself when the underlying configuration files changes. For this reason, you can use `IOptionsSnapshot` which isn't a singleton. It's a scoped service, so a new instance is created whenever the configuration changes. If you do want a singleton, you can use `IOptionsMonitor`.
+
+---
+### Configuring an app for multiple environments
+You'll likely want to have different configuration files for your environments to, for example:
+- use different database connection strings
+- use different logging levels
+
+By default, the `WebApplicationBuilder` looks for an environment variable called `ASPNETCORE_ENVIRONMENT` to identify the current environment. It then exposes what it knows about the current environment in a property `WebApplicationBuilder.Environment`. This property exposes several useful properties about running your app:
+- `ContentRootPath` - tells the application where it can find configuration files like app settings
+- `WebRootPath` - specifies where the app can find static files
+
+You can tell the current environment by accessing the `app.Environment.EnvironmentName` property, or by using one of these extension methods:
+- `IsDevelopment()`
+- `IsStaging()`
+- `IsProduction()`
+- `IsEnvironmentName(string environmentName)`
+
+You can then add environment-specific JSON files to the configuration manager.
+```csharp
+IHostEnvironment env = builder.Environment;
+
+builder.Configuration.Sources.Clear();
+builder.Configuration
+	   .AddJsonFile(
+		   "appsettings.json",
+		   optional: false)
+	   .AddJsonFile(
+		   $"appsettings.{env.EnvironmentName}.json",
+		   optional: true);
+```
+
+With this pattern, you have a global and mandatory `appsettings.json` file with settings that span all environments, and then environment specific `appsettings.json` files.
+
+##### Launch settings
+By default, the ASP.NET project will create a `launchSettings.json` file which has profiles that you can configure to launch your project. By default, it uses the first profile, but you can explicitly launch one of them with:
+
+```sh
+dotnet run --launch-profile <Profile Name>
+```
+
+You can also pass in the environment using CLI arguments.
+```sh
+dotnet run --no-launch-profile --environment Staging
+```
+
+
+
+
 prev: [[1 - Dependency Injection]]
