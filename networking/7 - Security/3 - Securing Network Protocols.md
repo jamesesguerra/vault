@@ -26,5 +26,8 @@ Bob needs to (1) establish a TCP connection with Alice, (2) verify that Alice *r
 ![[ssl-handshake.png]]
 
 **key derivation**
-Both Bob and Alice use the shared message secret to generate 4 keys. Each party generates a pair of keys: so they would have a key for encrypting data sent, and a key for verifying the integrity of the data.
+Both Bob and Alice use the shared message secret to generate 4 keys. Each party generates a pair of keys: so they would have a key for encrypting data sent, and a key for verifying the integrity of the data. These symmetric keys are used in their subsequent data exchanges.
+
+**data transfer**
+Now that both Alice and Bob share the same 4 session keys, they can start to send secured data over the TCP connection. SSL breaks the byte stream into records, appends a MAC to each record for integrity-checking, and then encrypts the record + MAC. Bob inputs the record data along with the MAC key into a hashed function, and then uses his encryption key to encrypt the result.
 
