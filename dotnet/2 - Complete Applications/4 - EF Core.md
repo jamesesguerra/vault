@@ -95,7 +95,7 @@ This command generates 3 files:
 - **migration designer.cs file** - describes EF Core's internal model of your data model at the point in time when the migration was generated 
 - **model snapshot file** - describes EF Core's current internal model and is updated when you add another migration
 
-Creating migration files doesn't change anything on the database. You have to apply the migrations to a database by running this command. This in turn, creates a database depending on whether it's already created or not.
+Creating migration files doesn't change anything on the database. You have to apply the migrations to a database by running this command. This, in turn, creates a database depending on whether it's already created or not.
 ```sh
 dotnet ef database update
 ```
