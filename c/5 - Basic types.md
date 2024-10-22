@@ -30,3 +30,15 @@ c = 'A';
 c += i;
 c; // 'B'
 ```
+
+#### Type conversions
+**Implicit conversions** are type conversions that can be performed by the compiler without the programmer's involvement. These include arithmetic operations between an `int` and a `short`, or an `int` and a `float`. C also allows you to perform **explicit conversions** using the cast operator.
+
+Implicit conversions are performed when:
+- the operands in an arithmetic or logical expression don't have the same type
+- the right side of an assignment operator doesn't have the same type as the variable on the left
+- the type of an argument doesn't match the type of its corresponding parameter
+- the type of a return value doesn't match the returned statement
+
+##### Casting
+A cast is an expression that has the form `(type) expression`
