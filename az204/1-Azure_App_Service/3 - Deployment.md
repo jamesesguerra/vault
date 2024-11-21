@@ -1,4 +1,4 @@
-a
+
 App Service supports both automated and manual deployment. 
 
 **Automated deployment** or CD pushes changes quickly with minimal effect on users
@@ -104,3 +104,12 @@ git push azure main
 ```
 
 
+#### Adding a Service Principal for an app
+
+```sh
+az ad sp create-for-rbac --name "github-action" --role contributor --scopes /subscriptions/26cf9844-f389-41ec-8cf3-e53da88f7419/resourceGroups/kitchenet/providers/Microsoft.Web/sites/kitchenet --sdk-auth
+<<<<<<< HEAD
+```
+=======
+```
+>>>>>>> 5f0a797 (mcommit)
