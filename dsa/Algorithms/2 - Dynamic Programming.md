@@ -1,0 +1,2 @@
+- https://leetcode.com/discuss/study-guide/458695/dynamic-programming-patterns
+- 
