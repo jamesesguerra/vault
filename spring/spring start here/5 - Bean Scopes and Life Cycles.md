@@ -1,5 +1,4 @@
 > **scopes** - are different ways Spring creates and manages the life cycle of a bean
-
 ### Singleton
 The singleton bean scope is the default scope Spring uses and is the most common in production apps.
 
@@ -38,7 +37,7 @@ System.out.println(c1 == c2); // returns True
 ```
 
 #### Immutability
-Singleton beans must be **immutable**, i.e. its fields must be `final`
+Singleton beans must be **immutable**, i.e. its fields must be `final` / have no fields at all. Beans / object instances are considered **thread-safe** this way because multiple threads can access the same instance without risk of any interference because the bean's behavior doesn't depend on instance-specific data that can change during execution.
 - If an app uses multiple threads to carry out an action, a race condition might occur since the 2 threads are accessing a shared resource of the same object instance
 - The developer needs to properly synchronize the thread to avoid race conditions, but this is generally considered as bad practice
 
@@ -121,3 +120,4 @@ public class CommentService {
 ```
 
 prev: [[4 - Abstractions]]
+next: [[6 - Aspects]]

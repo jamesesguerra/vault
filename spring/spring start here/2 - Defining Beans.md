@@ -1,3 +1,5 @@
+> **Why do we need to add beans?** So that we let Spring manage the creation and lifecycle of dependencies for us, and so that it can augment these dependencies with extra features
+
 ### Adding Beans using `@Bean`
 1. Install the `spring-context` dependency
 

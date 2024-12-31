@@ -6,6 +6,12 @@ Interfaces can also be thought of as things you can use to ask for what you need
 ### Benefits of interfaces
 They provide you with less coupling. If you want code that's easy to maintain and extend, you want the ability to change the implementation of a module without affecting higher-level modules that depend on it. By doing so, you introduce less changes and there are less stuff to recompile.
 
+### 3-Tier Architecture
+An layered architectural pattern used for creating highly maintainable and scalable applications
+1. **presentation layer (controllers)** - entry point; handles the HTTP request / response directly; delegates work to the service layer that will eventually return the final response
+2. **business logic layer (services)** - implements the business logic for the app's use cases; calls repository methods to collect data, transform if needed, and return
+3. **data access layer (repositories)** - interacts directly with the database to fetch / change data
+
 ### Case study
 Example: You're working on a feature of an app that allows users to publish a comment. When a comment is published, this comment gets saved into a database, and sent to an email set in the app's configuration.
 
