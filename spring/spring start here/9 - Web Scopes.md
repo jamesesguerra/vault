@@ -52,4 +52,4 @@ public class LoginCountService {
 - use a database instead for storing long-lived data
 
 prev: [[8 - Implementing Web Apps]]
-next: [[10 - Implementing REST Services]]
+next: [[10 - REST Services]]

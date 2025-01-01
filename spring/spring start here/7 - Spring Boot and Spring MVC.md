@@ -56,7 +56,7 @@ To add a web page to your app, you follow two steps:
 
 2. Write a controller with the action for the web page you created. Controllers are components of the web app that contain methods (also called actions) executed for a specific HTTP request.
 
-To create a controller, you add the `@Controller` annotation to a class. This is a stereotype annotation much like `@Service`. You then use the `@RequestMapping` annotation to associate a method / action to an HTTP request path. You then return the name of the HTML file as a string.
+To create a controller, you add the `@Controller` annotation to a class. This is a stereotype annotation much like `@Service` that says the class is an MVC controller. You then use the `@RequestMapping` annotation to associate a method / action to an HTTP request path. You then return the name of the HTML file as a string.
 
 ```java
 @Controller

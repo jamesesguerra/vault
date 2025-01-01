@@ -55,6 +55,10 @@ public String home(@PathVariable String color, Model page) { ... }
 
  3. **HTTP request headers**
 4. **HTTP request body**
+```java
+@PostMapping("/payment")
+public ResponseEntity<PaymentDetails> makePayment(@RequestBody PaymentDetails details) { ... }
+```
 
 #### HTTP verb annotations
 To use the same annotation for different HTTP verbs, use the `@RequestMapping` annotation. This defaults to matching GET requests. But if you want it to match to something else, you need to add parameters to the annotation.
