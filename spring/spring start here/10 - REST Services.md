@@ -107,7 +107,7 @@ public ResponseEntity<?> makePayment() {
 }
 ```
 
-(2) Another, more preferred way to handle exceptions is to use a REST controller advice -- an aspect that intercepts exceptions thrown by controller's actions and applies custom logic according to the intercepted exception.
+(2) Another, more preferred way to handle exceptions is to use a **REST controller advice** -- an aspect that intercepts exceptions thrown by controller's actions and applies custom logic according to the intercepted exception.
 
 This is more preferred as the controller need only handle the happy path. The error path is handled by another component.
 ```java
@@ -142,3 +142,5 @@ public class ExceptionControllerAdvice {
 
 ![[exception-controller-advice.png]]
 
+prev: [[9 - Web Scopes]]
+next: [[11 - Consuming REST Services]]

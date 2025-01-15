@@ -27,6 +27,4 @@ dotnet dev-certs https --trust
 ```
 
 
-
-
 ##### SSL / TLS Offloading

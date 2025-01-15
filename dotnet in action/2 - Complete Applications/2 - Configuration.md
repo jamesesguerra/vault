@@ -30,7 +30,7 @@ When adding settings, it's a good idea to group related settings for namespacing
 ```
 
 #### Adding a configuration provider
-To add a configuration provider, you can consult with either the `Configuration` property of `WebApplicationBuilder` or `WebApplication`.
+To add a configuration provider you can consult with either the `Configuration` property of `WebApplicationBuilder` or `WebApplication`
 
 There are some providers that are already added by default:
 - JSON file provider

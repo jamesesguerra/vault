@@ -1,3 +1,5 @@
+see also [[7 - Logging]]
+
 The .NET Core logging framework comes with several abstractions:
 - `ILogger` - has a `Log()` method which you use to interact with your code
 - `ILoggerProvider` - used to create a custom `ILogger` depending on the provider e.g console, file

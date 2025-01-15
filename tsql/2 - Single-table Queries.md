@@ -14,7 +14,7 @@ ORDER BY empid, orderyear;
 The clauses are logically processed in the following order:
 1. FROM
 2. JOINS
-3. WHERE
+3. WHERE 
 4. GROUP BY
 5. HAVING
 6. SELECT
@@ -196,7 +196,7 @@ FROM Sales.OrderDetails;
 ```
 
 ## CASE
-Case expressions are just like switch expressions in C# in that they test a scalar value against different predicates and return a value if there's a match, or if there isn't, an `ELSE` clause can be included to be a default value. `NULL` will be returned for the rows with no match if no `ELSE` clause is specified.
+expressions are just like switch expressions in C# in that they test a scalar value against different predicates and return a value if there's a match, or if there isn't, an `ELSE` clause can be included to be a default value. `NULL` will be returned for the rows with no match if no `ELSE` clause is specified.
 
 This type of `CASE` expression is called simple since you're simply testing a single value for equality against different values.
 ```sql
