@@ -27,8 +27,8 @@ EF Core is an ORM used to help developers interact with a DBMS source in a stand
 
 Install required packages when using a SQL Server database provider.
 ```sh
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer
-dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer 
+dotnet add package Microsoft.EntityFrameworkCore.Design # for creating migrations
 ```
 
 - `DbContext` - database session used for CRUD operations
