@@ -1,4 +1,4 @@
-> **authentication** is the act of verifying the correct identity of a computer, software or user; **authorization** is the process by which a system makes it possible to assign permissions to individual computers, software, or users
+ q> **authentication** is the act of verifying the correct identity of a computer, software or user; **authorization** is the process by which a system makes it possible to assign permissions to individual computers, software, or users
 
 #### Authentication
 Authentication is a mechanism to verify that an entity is what or who they claim to be. It's of utmost importance since it plays a key role in data protection, security, and monitoring. If you can uniquely verify the identify of a connecting subject to your web service, all actions performed within the system can be traced back to their authors.

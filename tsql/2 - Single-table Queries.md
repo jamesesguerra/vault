@@ -237,7 +237,7 @@ There are functions available that act as a shorthand of the `CASE` expression.
 **ISNULL & COALESCE** (standard SQL)
 `ISNULL` is like a null-coalescing function that takes in 2 arguments. It tests the first argument for `NULL` and if it isn't, it returns the value of the column in the first argument. If it *is* null, it returns the second argument as a somewhat default value.
 
-`COALESCE` is just like `ISNULL` but it accepts 2 or more arguments. It returns the firs argument that isn't `NULL`, or `NULL` if every argument is `NULL`.
+`=COALESCE` is just like `ISNULL` but it accepts 2 or more arguments. It returns the firs argument that isn't `NULL`, or `NULL` if every argument is `NULL`.
 
 ```sql
 SELECT empid, firstname, lastname, ISNULL(region, 'No region') as region_name

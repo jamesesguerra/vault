@@ -13,7 +13,8 @@ public class SortOrderValidatorAttribute : ValidationAttribute
     protected override ValidationResult? IsValid(  
         object? value,  
         ValidationContext validationContext)  
-    {        var strValue = value as string;  
+    {
+	    var strValue = value as string;  
   
         if (!string.IsNullOrEmpty(strValue)  
             && AllowedValues.Contains(strValue)) return ValidationResult.Success;
@@ -71,7 +72,8 @@ public class RequestDTO<T> : IValidatableObject
 {  
 	// ...
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)  
-    {        var validator = new SortColumnValidatorAttribute(typeof(T));  
+    {
+	    var validator = new SortColumnValidatorAttribute(typeof(T));  
   
         var result = validator.GetValidationResult(SortColumn, validationContext);  
   

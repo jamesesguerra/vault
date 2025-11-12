@@ -25,3 +25,11 @@ There are 3 states that your files can reside in:
 - **staged** - you have marked a modified file in its current version to go into your next commit snapshot
 
 ![[git-states.png]]
+
+#### Git Configuration
+1. Setting up your identity
+```sh
+git config --global user.name "John Doe"
+git config --global user.email "johndoe@example.com"
+```
+

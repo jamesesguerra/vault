@@ -1,0 +1,1 @@
+DVCS like Git open up a world of many different more workflows because every person isn't just a node on working on a central hub, they can be both a node *and* a hub.

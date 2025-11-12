@@ -1,4 +1,4 @@
-#### launchSettings.json
+ #### launchSettings.json
 Contains some configuration settings related to how the project should be launched **in development mode**. That also means this file won't be deployed with our app in production. You can tweak configuration on TCP ports used and environment variables.
 
 - `iisSettings` - contains launch configuration when using the IIS web server
@@ -62,4 +62,4 @@ app.MapGet("/error", () => Results.Problem());
 ```
 
 prev: [[1  - Web APIs at a Glance]]
-next: [[2 - Web API Projects]]
+next: [[3 - RESTful Principles & Guidelines]]

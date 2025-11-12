@@ -56,7 +56,7 @@ You can bind events to a property with `()`
 ### Changing State
 
 **Change Detection**
-Angular's change detection mechanism is powered by zone.js, which notifies Angular about user events, expired timers etc. When Angular receives a notification, it checks components for changes and updates the DOM accordingly. This makes it so that you can change state by simply updating the properties of the clas
+Angular's change detection mechanism is powered by zone.js, which notifies Angular about user events, expired timers etc. When Angular receives a notification, it checks components for changes and updates the DOM accordingly. This makes it so that you can change state by simply updating the properties of the class
 
 ```ts
 this.selectedUser = DUMMY_USERS[0];
